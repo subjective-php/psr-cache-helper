@@ -1,6 +1,7 @@
 {
     "name": "chadicus/psr-cache-helper",
     "description": "Utilities to assist with PSR-16 simple cache implementations",
+    "keywords": ["psr", "psr16", "cache", "util", "trait"],
     "license": "MIT",
     "authors": [
         {
