@@ -38,7 +38,7 @@ final class JsonSerializer implements SerializerInterface
      *
      * @return mixed
      *
-     * @throws \InvalidArgumentException Thrown if the given value cannot be unserialized.
+     * @throws InvalidArgumentException Thrown if the given value cannot be unserialized.
      */
     public function unserialize($data)
     {
@@ -56,7 +56,7 @@ final class JsonSerializer implements SerializerInterface
      *
      * @return mixed The result of serializing the given $data.
      *
-     * @throws \Psr\SimpleCache\InvalidArgumentException Thrown if the given value cannot be serialized for caching.
+     * @throws InvalidArgumentException Thrown if the given value cannot be serialized for caching.
      */
     public function serialize($value)
     {
