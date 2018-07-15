@@ -1,11 +1,11 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache\Serializer;
+namespace SubjectivePHPTest\Psr\SimpleCache\Serializer;
 
-use Chadicus\Psr\SimpleCache\Serializer\JsonSerializer;
+use SubjectivePHP\Psr\SimpleCache\Serializer\JsonSerializer;
 
 /**
- * @coversDefaultClass \Chadicus\Psr\SimpleCache\Serializer\JsonSerializer
+ * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\Serializer\JsonSerializer
  * @covers ::__construct
  * @covers ::<private>
  */

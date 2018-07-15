@@ -1,12 +1,12 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache;
+namespace SubjectivePHPTest\Psr\SimpleCache;
 
 use DateTime;
-use Chadicus\Psr\SimpleCache\InMemoryCache;
+use SubjectivePHP\Psr\SimpleCache\InMemoryCache;
 
 /**
- * @coversDefaultClass \Chadicus\Psr\SimpleCache\InMemoryCache
+ * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\InMemoryCache
  * @covers ::<private>
  */
 final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase

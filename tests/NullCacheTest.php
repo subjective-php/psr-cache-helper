@@ -1,11 +1,11 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache;
+namespace SubjectivePHPTest\Psr\SimpleCache;
 
-use Chadicus\Psr\SimpleCache\NullCache;
+use SubjectivePHP\Psr\SimpleCache\NullCache;
 
 /**
- * @coversDefaultClass Chadicus\Psr\SimpleCache\NullCache
+ * @coversDefaultClass SubjectivePHP\Psr\SimpleCache\NullCache
  * @covers ::<private>
  * @covers ::<protected>
  */
