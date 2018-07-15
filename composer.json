@@ -3,13 +3,6 @@
     "description": "Utilities to assist with PSR-16 simple cache implementations",
     "keywords": ["psr", "psr16", "cache", "util", "trait"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Chad Gray",
-            "email": "chadwickgray@gmail.com",
-            "role": "Developer"
-        }
-    ],
     "require": {
         "php": "^7.0",
         "psr/simple-cache": "^1.0"
