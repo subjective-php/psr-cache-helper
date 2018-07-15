@@ -1,8 +1,8 @@
 <?php
 
-namespace Chadicus\Psr\SimpleCache\Serializer;
+namespace SubjectivePHP\Psr\SimpleCache\Serializer;
 
-use \Chadicus\Psr\SimpleCache\InvalidArgumentException;
+use SubjectivePHP\Psr\SimpleCache\InvalidArgumentException;
 
 /**
  * Serializer implementation responsible for serializing and unserializing data to and from json.

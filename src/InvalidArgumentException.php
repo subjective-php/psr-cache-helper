@@ -1,6 +1,6 @@
 <?php
 
-namespace Chadicus\Psr\SimpleCache;
+namespace SubjectivePHP\Psr\SimpleCache;
 
 /**
  * Exception interface for invalid cache arguments.

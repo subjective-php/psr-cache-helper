@@ -1,6 +1,6 @@
 <?php
 
-namespace Chadicus\Psr\SimpleCache\Serializer;
+namespace SubjectivePHP\Psr\SimpleCache\Serializer;
 
 /**
  * Contract for object responsible for serializing and unserializing data for caching.

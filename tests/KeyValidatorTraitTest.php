@@ -1,11 +1,11 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache;
+namespace SubjectivePHPTest\Psr\SimpleCache;
 
-use Chadicus\Psr\SimpleCache\KeyValidatorTrait;
+use SubjectivePHP\Psr\SimpleCache\KeyValidatorTrait;
 
 /**
- * @coversDefaultClass \Chadicus\Psr\SimpleCache\KeyValidatorTrait
+ * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\KeyValidatorTrait
  * @covers ::<private>
  */
 final class KeyValidatorTraitTest extends \PHPUnit\Framework\TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chadicus\Psr\SimpleCache;
+namespace SubjectivePHP\Psr\SimpleCache;
 
 /**
  * Trait for validating PSR-16 simple cache keys.

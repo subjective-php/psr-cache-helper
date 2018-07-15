@@ -1,11 +1,11 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache;
+namespace SubjectivePHPTest\Psr\SimpleCache;
 
-use Chadicus\Psr\SimpleCache\TTLValidatorTrait;
+use SubjectivePHP\Psr\SimpleCache\TTLValidatorTrait;
 
 /**
- * @coversDefaultClass \Chadicus\Psr\SimpleCache\TTLValidatorTrait
+ * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\TTLValidatorTrait
  * @covers ::<private>
  */
 final class TTLValidatorTraitTest extends \PHPUnit\Framework\TestCase

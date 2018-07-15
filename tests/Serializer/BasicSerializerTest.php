@@ -1,11 +1,11 @@
 <?php
 
-namespace ChadicusTest\Psr\SimpleCache\Serializer;
+namespace SubjectivePHPTest\Psr\SimpleCache\Serializer;
 
-use Chadicus\Psr\SimpleCache\Serializer\BasicSerializer;
+use SubjectivePHP\Psr\SimpleCache\Serializer\BasicSerializer;
 
 /**
- * @coversDefaultClass \Chadicus\Psr\SimpleCache\Serializer\BasicSerializer
+ * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\Serializer\BasicSerializer
  * @covers ::<private>
  */
 final class BasicSerializerTest extends \PHPUnit\Framework\TestCase
