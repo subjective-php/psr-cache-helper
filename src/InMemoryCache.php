@@ -2,6 +2,7 @@
 
 namespace SubjectivePHP\Psr\SimpleCache;
 
+use ArrayObject;
 use DateInterval;
 use DateTime;
 use Psr\SimpleCache\CacheInterface;
@@ -15,9 +16,19 @@ final class InMemoryCache implements CacheInterface
     use TTLValidatorTrait;
 
     /**
-     * @var array
+     * @var ArrayObject
      */
-    private $cache = [];
+    private $cache;
+
+    /**
+     * Construct a new instance of InMemoryCache.
+     *
+     * @param ArrayObject $cache Initial cache container.
+     */
+    public function __construct(ArrayObject $cache = null)
+    {
+        $this->cache = $cache ?? new ArrayObject();
+    }
 
     /**
      * Fetches a value from the cache.
@@ -155,7 +166,7 @@ final class InMemoryCache implements CacheInterface
      */
     public function clear()//@codingStandardsIgnoreLine Interface does not define type-hints or return
     {
-        $this->cache = [];
+        $this->cache->exchangeArray([]);
         return true;
     }
 

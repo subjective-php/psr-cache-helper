@@ -2,11 +2,13 @@
 
 namespace SubjectivePHPTest\Psr\SimpleCache;
 
+use ArrayObject;
 use DateTime;
 use SubjectivePHP\Psr\SimpleCache\InMemoryCache;
 
 /**
  * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\InMemoryCache
+ * @covers ::__construct
  * @covers ::<private>
  */
 final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
@@ -17,11 +19,17 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
     private $cache;
 
     /**
+     * @var ArrayObject
+     */
+    private $container;
+
+    /**
      * @return void
      */
     public function setUp()
     {
-        $this->cache = new InMemoryCache();
+        $this->container = new ArrayObject();
+        $this->cache = new InMemoryCache($this->container);
     }
 
     /**
@@ -33,7 +41,7 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
     public function get()
     {
         $dateTime = new DateTime();
-        $this->cache->set('foo', $dateTime);
+        $this->container['foo'] = ['data' => $dateTime, 'expires' => PHP_INT_MAX];
         $this->assertEquals($dateTime, $this->cache->get('foo'));
     }
 
@@ -57,7 +65,7 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function getExpired()
     {
-        $this->cache->set('foo', new DateTime(), -10);
+        $this->container['foo'] = ['data' => new DateTime(), 'expires' => -10];
         $this->assertNull($this->cache->get('foo'));
     }
 
@@ -90,7 +98,15 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
     {
         $dateTime = new \DateTime();
         $this->assertTrue($this->cache->set('foo', $dateTime, 3600));
-        $this->assertEquals($dateTime, $this->cache->get('foo'));
+        $this->assertSame(
+            [
+                'foo' => [
+                    'data' => $dateTime,
+                    'expires' => time() + 3600,
+                ],
+            ],
+            $this->container->getArrayCopy()
+        );
     }
 
     /**
@@ -167,9 +183,8 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
         $this->cache->set('baz', 'baz');
 
         $this->cache->clear();
-        $this->assertNull($this->cache->get('foo'));
-        $this->assertNull($this->cache->get('bar'));
-        $this->assertNull($this->cache->get('baz'));
+
+        $this->assertSame([], $this->container->getArrayCopy());
     }
 
     /**
