@@ -26,7 +26,7 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->container = new ArrayObject();
         $this->cache = new InMemoryCache($this->container);

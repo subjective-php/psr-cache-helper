@@ -6,7 +6,6 @@ use SubjectivePHP\Psr\SimpleCache\KeyValidatorTrait;
 
 /**
  * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\KeyValidatorTrait
- * @covers ::<private>
  */
 final class KeyValidatorTraitTest extends \PHPUnit\Framework\TestCase
 {
@@ -28,13 +27,13 @@ final class KeyValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      * @covers ::validateKey
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
      * @dataProvider provideInvalidKeys
      *
      * @return void
      */
     public function validateKeyWithInvalidValue($key)
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
         $this->validateKey($key);
     }
 
@@ -54,13 +53,13 @@ final class KeyValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      * @covers ::validateKeys
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
      * @dataProvider provideInvalidKeys
      *
      * @return void
      */
     public function validateKeysWithInvalidValue($key)
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
         $this->validateKeys(['valid_key', $key, 'another_valid_key']);
     }
 

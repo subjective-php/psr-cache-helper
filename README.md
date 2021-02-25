@@ -18,7 +18,7 @@ Utilities to assist with [PSR-16 SimpleCache](http://www.php-fig.org/psr/psr-16/
 
 ## Requirements
 
-Requires PHP 7.0 (or later).
+Requires PHP 8.0 (or later).
 
 ## Composer
 To add the library as a local, per-project dependency use [Composer](http://getcomposer.org)! Simply add a dependency on `subjective-php/psr-cache-helper` to your project's `composer.json` file such as:

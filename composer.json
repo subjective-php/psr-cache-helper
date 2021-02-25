@@ -7,12 +7,12 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.0",
+        "php": "^8.0",
         "psr/simple-cache": "^1.0"
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.1",
-        "phpunit/phpunit": "^6.1",
+        "phpunit/phpunit": "^9.3",
         "squizlabs/php_codesniffer": "^3.3"
     },
     "autoload": {
@@ -22,7 +22,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SubjectivePHP\\Psr\\SimpleCache\\": "tests"
+            "SubjectivePHPTest\\Psr\\SimpleCache\\": "tests"
         }
     }
 }

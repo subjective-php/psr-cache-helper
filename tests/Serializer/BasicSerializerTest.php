@@ -28,13 +28,14 @@ final class BasicSerializerTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      * @covers ::unserialize
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
-     * @expectedExceptionMessage unserialize(): Error at offset 34 of 34 bytes
      *
      * @return void
      */
     public function unserializeInvalidData()
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+        $this->expectExceptionMessage('unserialize(): Error at offset 34 of 34 bytes');
+
         $serializer = new BasicSerializer();
         $serializer->unserialize('a:2:{s:3:"foo";s:3:"abc";s:3:"bar"');
     }
@@ -42,13 +43,14 @@ final class BasicSerializerTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      * @covers ::unserialize
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
-     * @expectedExceptionMessage $data must be a string
      *
      * @return void
      */
     public function unserializeNonStringData()
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$data must be a string');
+
         $serializer = new BasicSerializer();
         $serializer->unserialize(true);
     }
@@ -71,13 +73,14 @@ final class BasicSerializerTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      * @covers ::serialize
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
-     * @expectedExceptionMessage Serialization of 'Closure' is not allowed
      *
      * @return void
      */
     public function serializeFilure()
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Serialization of 'Closure' is not allowed");
+
         $serializer = new BasicSerializer();
         $serializer->serialize(
             function () {
