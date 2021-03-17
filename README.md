@@ -12,8 +12,6 @@
 [![Daily Downloads](https://poser.pugx.org/subjective-php/psr-cache-helper/d/daily)](https://packagist.org/packages/subjective-php/psr-cache-helper)
 [![Monthly Downloads](https://poser.pugx.org/subjective-php/psr-cache-helper/d/monthly)](https://packagist.org/packages/subjective-php/psr-cache-helper)
 
-[![Documentation](https://img.shields.io/badge/reference-phpdoc-blue.svg?style=flat)](http://pholiophp.org/subjective-php/psr-cache-helper)
-
 Utilities to assist with [PSR-16 SimpleCache](http://www.php-fig.org/psr/psr-16/) implementations.
 
 ## Requirements
