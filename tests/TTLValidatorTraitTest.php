@@ -6,7 +6,6 @@ use SubjectivePHP\Psr\SimpleCache\TTLValidatorTrait;
 
 /**
  * @coversDefaultClass \SubjectivePHP\Psr\SimpleCache\TTLValidatorTrait
- * @covers ::<private>
  */
 final class TTLValidatorTraitTest extends \PHPUnit\Framework\TestCase
 {
@@ -45,13 +44,14 @@ final class TTLValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @test
      * @covers ::validateTTL
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
      * @dataProvider provideInvalidTTLs
      *
      * @return void
      */
     public function validateTTLWithInvalidValue($ttl)
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+
         $this->validateTTL($ttl);
     }
 

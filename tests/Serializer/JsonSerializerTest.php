@@ -41,13 +41,14 @@ final class JsonSerializerTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      * @covers ::unserialize
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
-     * @expectedExceptionMessage Syntax error
      *
      * @return void
      */
     public function unserializeFailure()
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Syntax error');
+
         $serializer = new JsonSerializer();
         $json = '{"foo": "abc","bar": 123';
         $serializer->unserialize($json);
@@ -74,13 +75,14 @@ JSON;
     /**
      * @test
      * @covers ::serialize
-     * @expectedException \Psr\SimpleCache\InvalidArgumentException
-     * @expectedExceptionMessage Inf and NaN cannot be JSON encoded
      *
      * @return void
      */
     public function serializeFailure()
     {
+        $this->expectException(\Psr\SimpleCache\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
+
         $serializer = new JsonSerializer();
         $serializer->serialize(['foo' => NAN]);
     }
