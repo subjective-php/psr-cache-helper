@@ -11,7 +11,6 @@
         "psr/simple-cache": "^1.0"
     },
     "require-dev": {
-        "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^9.3",
         "squizlabs/php_codesniffer": "^3.3"
     },
@@ -24,5 +23,9 @@
         "psr-4": {
             "SubjectivePHPTest\\Psr\\SimpleCache\\": "tests"
         }
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs",
+        "test": "vendor/bin/phpunit"
     }
 }
