@@ -14,25 +14,6 @@ use SubjectivePHP\Psr\SimpleCache\InMemoryCache;
 final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var InMemoryCache
-     */
-    private $cache;
-
-    /**
-     * @var ArrayObject
-     */
-    private $container;
-
-    /**
-     * @return void
-     */
-    public function setUp() : void
-    {
-        $this->container = new ArrayObject();
-        $this->cache = new InMemoryCache($this->container);
-    }
-
-    /**
      * @test
      * @covers ::get
      *
@@ -40,9 +21,11 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function get()
     {
+        $container = new ArrayObject();
+        $cache = new InMemoryCache($container);
         $dateTime = new DateTime();
-        $this->container['foo'] = ['data' => $dateTime, 'expires' => PHP_INT_MAX];
-        $this->assertEquals($dateTime, $this->cache->get('foo'));
+        $container['foo'] = ['data' => $dateTime, 'expires' => PHP_INT_MAX];
+        $this->assertEquals($dateTime, $cache->get('foo'));
     }
 
     /**
@@ -53,8 +36,9 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function getKeyNotFound()
     {
+        $cache = new InMemoryCache(new ArrayObject());
         $default = new \StdClass();
-        $this->assertSame($default, $this->cache->get('foo', $default));
+        $this->assertSame($default, $cache->get('foo', $default));
     }
 
     /**
@@ -65,8 +49,10 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function getExpired()
     {
-        $this->container['foo'] = ['data' => new DateTime(), 'expires' => -10];
-        $this->assertNull($this->cache->get('foo'));
+        $container = new ArrayObject();
+        $container['foo'] = ['data' => new DateTime(), 'expires' => -10];
+        $cache = new InMemoryCache($container);
+        $this->assertNull($cache->get('foo'));
     }
 
     /**
@@ -77,12 +63,13 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function getMultple()
     {
+        $cache = new InMemoryCache(new ArrayObject());
         $default = new \StdClass();
         $dateTime = new \DateTime();
         $exception = new \RuntimeException();
-        $this->cache->set('foo', $dateTime);
-        $this->cache->set('bar', $exception);
-        $actual = $this->cache->getMultiple(['foo', 'baz', 'bar'], $default);
+        $cache->set('foo', $dateTime);
+        $cache->set('bar', $exception);
+        $actual = $cache->getMultiple(['foo', 'baz', 'bar'], $default);
         $this->assertEquals($dateTime, $actual['foo']);
         $this->assertSame($default, $actual['baz']);
         $this->assertEquals($exception, $actual['bar']);
@@ -96,8 +83,10 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function setWithIntegerTTL()
     {
+        $container = new ArrayObject();
+        $cache = new InMemoryCache($container);
         $dateTime = new \DateTime();
-        $this->assertTrue($this->cache->set('foo', $dateTime, 3600));
+        $this->assertTrue($cache->set('foo', $dateTime, 3600));
         $this->assertSame(
             [
                 'foo' => [
@@ -105,7 +94,7 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
                     'expires' => time() + 3600,
                 ],
             ],
-            $this->container->getArrayCopy()
+            $container->getArrayCopy()
         );
     }
 
@@ -118,8 +107,9 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
     public function setWithNullTTL()
     {
         $dateTime = new \DateTime();
-        $this->assertTrue($this->cache->set('foo', $dateTime));
-        $this->assertEquals($dateTime, $this->cache->get('foo'));
+        $cache = new InMemoryCache(new ArrayObject());
+        $this->assertTrue($cache->set('foo', $dateTime));
+        $this->assertEquals($dateTime, $cache->get('foo'));
     }
 
     /**
@@ -133,9 +123,10 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
         $ttl = \DateInterval::createFromDateString('1 day');
         $dateTime = new \DateTime();
         $exception = new \RuntimeException();
-        $this->assertTrue($this->cache->setMultiple(['foo' => $dateTime, 'bar' => $exception], $ttl));
-        $this->assertEquals($dateTime, $this->cache->get('foo'));
-        $this->assertEquals($exception, $this->cache->get('bar'));
+        $cache = new InMemoryCache(new ArrayObject());
+        $this->assertTrue($cache->setMultiple(['foo' => $dateTime, 'bar' => $exception], $ttl));
+        $this->assertEquals($dateTime, $cache->get('foo'));
+        $this->assertEquals($exception, $cache->get('bar'));
     }
 
     /**
@@ -146,10 +137,11 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function delete()
     {
+        $cache = new InMemoryCache(new ArrayObject());
         $dateTime = new DateTime();
-        $this->cache->set('foo', $dateTime);
-        $this->cache->delete('foo');
-        $this->assertNull($this->cache->get('foo'));
+        $cache->set('foo', $dateTime);
+        $cache->delete('foo');
+        $this->assertNull($cache->get('foo'));
     }
 
     /**
@@ -160,14 +152,15 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function deleteMultiple()
     {
-        $this->cache->set('foo', 'foo');
-        $this->cache->set('bar', 'bar');
-        $this->cache->set('baz', 'baz');
+        $cache = new InMemoryCache(new ArrayObject());
+        $cache->set('foo', 'foo');
+        $cache->set('bar', 'bar');
+        $cache->set('baz', 'baz');
 
-        $this->cache->deleteMultiple(['foo', 'bar']);
-        $this->assertNull($this->cache->get('foo'));
-        $this->assertNull($this->cache->get('bar'));
-        $this->assertSame('baz', $this->cache->get('baz'));
+        $cache->deleteMultiple(['foo', 'bar']);
+        $this->assertNull($cache->get('foo'));
+        $this->assertNull($cache->get('bar'));
+        $this->assertSame('baz', $cache->get('baz'));
     }
 
     /**
@@ -178,13 +171,15 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function clear()
     {
-        $this->cache->set('foo', 'foo');
-        $this->cache->set('bar', 'bar');
-        $this->cache->set('baz', 'baz');
+        $container = new ArrayObject();
+        $cache = new InMemoryCache($container);
+        $cache->set('foo', 'foo');
+        $cache->set('bar', 'bar');
+        $cache->set('baz', 'baz');
 
-        $this->cache->clear();
+        $cache->clear();
 
-        $this->assertSame([], $this->container->getArrayCopy());
+        $this->assertSame([], $container->getArrayCopy());
     }
 
     /**
@@ -195,8 +190,9 @@ final class InMemoryCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function has()
     {
-        $this->cache->set('foo', 'foo');
-        $this->assertTrue($this->cache->has('foo'));
-        $this->assertFalse($this->cache->has('bar'));
+        $cache = new InMemoryCache(new ArrayObject());
+        $cache->set('foo', 'foo');
+        $this->assertTrue($cache->has('foo'));
+        $this->assertFalse($cache->has('bar'));
     }
 }

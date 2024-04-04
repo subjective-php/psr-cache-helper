@@ -68,13 +68,13 @@ final class KeyValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
-    public function provideInvalidKeys() : array
+    public static function provideInvalidKeys() : array
     {
         return [
-            ['an empty string' => ''],
-            ['an object' => new \StdClass()],
-            ['an integer' => 123],
-            ['reserved characters' => '@key'],
+            [''],
+            [new \StdClass()],
+            [123],
+            ['@key'],
         ];
     }
 }

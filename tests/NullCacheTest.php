@@ -12,23 +12,6 @@ use SubjectivePHP\Psr\SimpleCache\NullCache;
 final class NullCacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * NullCache instance to use in tests.
-     *
-     * @var NullCache
-     */
-    private $cache;
-
-    /**
-     * Prepare each test
-     *
-     * @return void
-     */
-    public function setUp() : void
-    {
-        $this->cache = new NullCache();
-    }
-
-    /**
      * Verify basic behavior of get().
      *
      * @test
@@ -38,8 +21,9 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function get()
     {
+        $cache = new NullCache();
         $default = new \StdClass();
-        $this->assertSame($default, $this->cache->get('a key', $default));
+        $this->assertSame($default, $cache->get('a key', $default));
     }
 
     /**
@@ -52,7 +36,8 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function set()
     {
-        $this->assertTrue($this->cache->set('a key', 'some data'));
+        $cache = new NullCache();
+        $this->assertTrue($cache->set('a key', 'some data'));
     }
 
     /**
@@ -65,7 +50,8 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function delete()
     {
-        $this->assertTrue($this->cache->delete('a key'));
+        $cache = new NullCache();
+        $this->assertTrue($cache->delete('a key'));
     }
 
     /**
@@ -78,7 +64,8 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function clear()
     {
-        $this->assertTrue($this->cache->clear());
+        $cache = new NullCache();
+        $this->assertTrue($cache->clear());
     }
 
     /**
@@ -91,10 +78,11 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function getMultiple()
     {
+        $cache = new NullCache();
         $default = new \StdClass();
         $this->assertSame(
             ['key1' => $default, 'key2' => $default],
-            $this->cache->getMultiple(['key1', 'key2'], $default)
+            $cache->getMultiple(['key1', 'key2'], $default)
         );
     }
 
@@ -108,7 +96,8 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function setMultiple()
     {
-        $this->assertTrue($this->cache->setMultiple(['key' => 'some data', 'key2' => 'some more data']));
+        $cache = new NullCache();
+        $this->assertTrue($cache->setMultiple(['key' => 'some data', 'key2' => 'some more data']));
     }
 
     /**
@@ -121,7 +110,8 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function deleteMultiple()
     {
-        $this->assertTrue($this->cache->deleteMultiple(['key1', 'key2']));
+        $cache = new NullCache();
+        $this->assertTrue($cache->deleteMultiple(['key1', 'key2']));
     }
 
     /**
@@ -134,6 +124,7 @@ final class NullCacheTest extends \PHPUnit\Framework\TestCase
      */
     public function has()
     {
-        $this->assertFalse($this->cache->has('key1'));
+        $cache = new NullCache();
+        $this->assertFalse($cache->has('key1'));
     }
 }
