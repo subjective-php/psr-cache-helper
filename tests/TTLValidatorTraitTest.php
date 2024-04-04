@@ -30,12 +30,12 @@ final class TTLValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
-    public function provideValidTTLs()
+    public static function provideValidTTLs()
     {
         return [
-            ['null' => null],
-            ['DateInterval' => \DateInterval::createFromDateString('1 day')],
-            ['int' => 3600],
+            [null],
+            [\DateInterval::createFromDateString('1 day')],
+            [3600],
         ];
     }
 
@@ -60,12 +60,12 @@ final class TTLValidatorTraitTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
-    public function provideInvalidTTLs()
+    public static function provideInvalidTTLs()
     {
         return [
-            ['string' => ''],
-            ['float' => 1.1],
-            ['DdateTime' => new \DateTime()],
+            [''],
+            [1.1],
+            [new \DateTime()],
         ];
     }
 }

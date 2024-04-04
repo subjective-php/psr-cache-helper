@@ -11,21 +11,6 @@ use SubjectivePHP\Psr\SimpleCache\Serializer\NullSerializer;
 final class NullSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var NullSerializer
-     */
-    private $serializer;
-
-    /**
-     * Prepare each test
-     *
-     * @return void
-     */
-    public function setUp() : void
-    {
-        $this->serializer = new NullSerializer();
-    }
-
-    /**
      * @test
      * @covers ::unserialize
      *
@@ -33,8 +18,9 @@ final class NullSerializerTest extends \PHPUnit\Framework\TestCase
      */
     public function unserialize()
     {
+        $serializer = new NullSerializer();
         $data = ['foo' => 'abc', 'bar' => 123];
-        $this->assertSame($data, $this->serializer->unserialize($data));
+        $this->assertSame($data, $serializer->unserialize($data));
     }
 
     /**
@@ -45,7 +31,8 @@ final class NullSerializerTest extends \PHPUnit\Framework\TestCase
      */
     public function serialize()
     {
+        $serializer = new NullSerializer();
         $data = ['foo' => 'abc', 'bar' => 123];
-        $this->assertSame($data, $this->serializer->serialize($data));
+        $this->assertSame($data, $serializer->serialize($data));
     }
 }
